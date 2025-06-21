@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void limpar_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 void imprime_menu() {
   printf("=========================================\n");
   printf("      Calculadora Simples\n");
@@ -48,7 +53,7 @@ int main() {
         if (b == 0) {
           printf("Erro: divisão por zero.\n");
         } else {
-          printf("Resultado: %.2f - %.2f = %.2f\n", a, b, a/b);
+          printf("Resultado: %.2f / %.2f = %.2f\n", a, b, a/b);
         }
         break;
       case 5:
@@ -63,10 +68,15 @@ int main() {
     if (bandeira_2 == 1) {
       char c;
       printf("Deseja realizar outra operação? (s/n):\n");
-      scanf(" %c", &c);
-      if (c == 'n') {
+      while (1) {
+        scanf(" %c", &c);
+        if (c == 'n' || c == 'N' || c == 's' || c == 'S') break;
+        printf("Resposta inválida. Por favor, digite 's' para sim ou 'n para não.\n");
+      }
+      if (c == 'n' || c == 'N') {
         bandeira_1 = 0;
       }
+      
     }
   
   } while (bandeira_1);
