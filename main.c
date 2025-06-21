@@ -30,8 +30,12 @@ int main() {
   do {
     limpar_tela();
     imprime_menu();
-    int opcao = -1;
-    scanf("%d", &opcao);
+    
+    int opcao = 0;
+        while (scanf("%d", &opcao) != 1 || opcao < 1 || opcao > 5) {
+            printf("Escolha uma opção válida (1-5): ");
+            while(getchar() != '\n'); // Limpa buffer
+        }
 
     bandeira_2 = 1;
     float a, b = 0;
@@ -60,10 +64,6 @@ int main() {
         bandeira_1 = 0;
         bandeira_2 = -1;
         break;
-      default:
-        printf("\nEscolha uma opção válida.");
-        bandeira_2 = 0;
-        break;
     }
     if (bandeira_2 == 1) {
       char c;
@@ -72,6 +72,7 @@ int main() {
         scanf(" %c", &c);
         if (c == 'n' || c == 'N' || c == 's' || c == 'S') break;
         printf("Resposta inválida. Por favor, digite 's' para sim ou 'n para não.\n");
+        while(getchar() != '\n');
       }
       if (c == 'n' || c == 'N') {
         bandeira_1 = 0;
